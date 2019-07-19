@@ -1,0 +1,26 @@
+@model Wedding
+<header>
+<h1> @ViewBag.User.FirstName, Plan your wedding</h1>
+<a asp-action = "Dashboard" asp-controller = "Wedding"></a>
+<a asp-action = "LogOut" asp-controller = "Home"></a>
+</header>
+
+<div>
+    <span asp-validation-for="WedderOne"></span>
+    <span asp-validation-for="WedderTwo"></span>
+    <span asp-validation-for="WeddingDate"></span>
+    <span asp-validation-for="Address"></span>
+</div>
+
+<form asp-action="CreateWedding" asp-controller="Wedding" method="post">
+    <input type="hidden" asp-for="UserId" value="@ViewBag.User.UserId">
+    <label asp-for="WedderOne"></label>
+    <input asp-for="WedderOne"><br>
+    <label asp-for="WedderTwo"></label>
+    <input asp-for="WedderTwo"><br>
+    <label asp-for="WeddingDate"></label>
+    <input type="Date" asp-for="WeddingDate"><br>
+    <label asp-for="Address"></label>
+    <input asp-for="Address"><br>
+    <input type="submit" value="Create">
+    </form>

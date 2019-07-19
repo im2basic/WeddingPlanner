@@ -1,0 +1,19 @@
+@model Wedding
+<header>
+<h1>@Model.WedderOne & @Model.WedderTwo's Wedding </h1>
+<a asp-action="Dashboard" asp-controller="Wedding">Dashboard</a>
+<a asp-action="LogOut" asp-controller="Home">Logout</a>
+</header>
+<h4>When: @Model.WeddingDate.ToString("MM/dd/yyyy")</h4>
+<h4>Where: @Model.Address</h4>
+<div>
+    <h6>Guest list:</h6>
+    @if(@Model.GuestList.Count == 0 )
+    {
+        <p>No one loves us.</p>
+    }
+    @foreach( var r in @Model.GuestList)
+    {
+        <p>@r.Guest.FirstName @r.Guest.LastName </p>
+    }
+</div>
