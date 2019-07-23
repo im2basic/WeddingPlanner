@@ -29,10 +29,10 @@ namespace WeddingPlanner.Controllers
             }
             else 
             {
+                //This code Compares Dates and does not display past dates
                 List<Wedding> AllWeddings = dbContext.Weddings.Include(w => w.GuestList)
-                .ThenInclude(r => r.Guest)
-                .ToList();
-
+                .ThenInclude(r => r.Guest).Where(c => c.WeddingDate > DateTime.Now).ToList();
+                
                 ViewBag.User = dbContext.Users.Include(u => u.CreatedWeddings).Include(u => u.Weddings).ThenInclude( r => r.Attending).FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("UserId"));
 
                 return View ("Dashboard",AllWeddings);
@@ -81,7 +81,7 @@ namespace WeddingPlanner.Controllers
                 }
                 else
                 {
-                    Wedding myWedding = dbContext.Weddings.Include(w => w.GuestList).ThenInclude( r => r.Attending).FirstOrDefault(w => w.WeddingId == WeddingId);
+                    Wedding myWedding = dbContext.Weddings.Include(w => w.GuestList).ThenInclude( r => r.Guest).FirstOrDefault(w => w.WeddingId == WeddingId);
 
                     ViewBag.User = dbContext.Users.FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("UserId"));
                     return View("ShowWedding", myWedding);

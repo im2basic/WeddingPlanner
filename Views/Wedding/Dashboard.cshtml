@@ -31,7 +31,7 @@
                     }
                     @if(w.GuestList.Any(r => r.UserId == ViewBag.User.UserId))
                     {
-                        <td><a asp-action="RSVP" asp-controller="Response" asp-route-WeddingId = "@w.WeddingId" asp-route-Status = "remove" >Stay Home</a></td>
+                        <td><a asp-action="RSVP" asp-controller="Response" asp-route-WeddingId = "@w.WeddingId" asp-route-Status = "remove" >Un-RSVP</a></td>
                     }
                 }
             </tr>
